@@ -11,6 +11,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import ListView from "./components/layout/ListView";
+import BoardView from "./components/layout/BoardView"
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -41,11 +43,8 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-{/*
-              Enable these once components are done
               <PrivateRoute exact path="/list" component = {ListView} />
               <PrivateRoute exact path="/board" component = {BoardView} />
-*/}
             </Switch>
           </div>
         </Router>

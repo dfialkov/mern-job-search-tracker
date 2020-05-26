@@ -41,6 +41,11 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+{/*
+              Enable these once components are done
+              <PrivateRoute exact path="/list" component = {ListView} />
+              <PrivateRoute exact path="/board" component = {BoardView} />
+*/}
             </Switch>
           </div>
         </Router>

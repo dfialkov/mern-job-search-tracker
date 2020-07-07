@@ -1,5 +1,5 @@
 module.exports = {
-    mongoURI: "example2",
+    mongoURI: "example3",
     secretOrKey: "secret"
     
 }

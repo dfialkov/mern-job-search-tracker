@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // Create Schema
-const UserSchema = new Schema({
+const ApplicationSchema = new Schema({
+  userEmail:{
+    type:String,
+    required:true
+  },
 
   company: {
     type: String,
-    required: false
+    required: true
   },
   position: {
       type:String, 
@@ -13,20 +17,20 @@ const UserSchema = new Schema({
   },
   recruiterContact: {
     type: String,
-    required: true
+    required: false
   },
-  offerStatus: {
+  appStatus: {
     type: String,
     enum: ["Application", "Phone Screen", "Onsite", "Offer"],
     required:true
   },
   salary: {
-      type: Number,
+      type: String,
       required:false
   },
   time:{
       type: Date,
-      default: Date.now
+      default: Date.now()
   }
 });
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = Application = mongoose.model("applications", ApplicationSchema);

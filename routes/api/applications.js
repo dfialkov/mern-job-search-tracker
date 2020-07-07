@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const keys = require("../../config/keys");
 // Load input validation
-const validateRegisterInput = require("../../validation/newapp");
+const validateNewappInput = require("../../validation/newapp");
 
-// Load User model
-const User = require("../../models/User");
+// Load Application model
+const Application = require("../../models/Application");
 
-// @route POST api/users/register
+// @route POST api/newapp
 // @desc Register user
 // @access Public
 router.post("/newapp", (req, res) => {
@@ -19,70 +18,22 @@ router.post("/newapp", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const newUser = new Application({
-    //Put in parameters later
-    position: req.body.position,
+  const newApp = new Application({
+
+    userEmail: req.body.userEmail,
     company: req.body.company,
+    position: req.body.position,
     recruiterContact: req.body.recruiterContact,
-    offerStatus: req.body.offerStatus,
-    salary = req.body.salary,
-    time
+    appStatus: req.body.appStatus,
+    salary: req.body.salary,
+    time: Date.now()
   });
 
-  newUser
+  newApp
     .save()
-    .then((user) => res.json(user))
-    .catch((err) => console.log(err));
+    .then((app) => res.json(app))
+    .catch((err) => res.status(400).json(err));
 });
 
-// @route POST api/users/login
-// @desc Login user and return JWT token
-// @access Public
-router.post("/login", (req, res) => {
-  // Form validation
-  const { errors, isValid } = validateLoginInput(req.body);
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-  const email = req.body.email;
-  const password = req.body.password;
-  // Find user by email
-  User.findOne({ email }).then((user) => {
-    // Check if user exists
-    if (!user) {
-      return res.status(404).json({ emailnotfound: "Email not found" });
-    }
-    // Check password
-    bcrypt.compare(password, user.password).then((isMatch) => {
-      if (isMatch) {
-        // User matched
-        // Create JWT Payload
-        const payload = {
-          id: user.id,
-          name: user.name,
-        };
-        // Sign token
-        jwt.sign(
-          payload,
-          keys.secretOrKey,
-          {
-            expiresIn: 31556926, // 1 year in seconds
-          },
-          (err, token) => {
-            res.json({
-              success: true,
-              token: "Bearer " + token,
-            });
-          }
-        );
-      } else {
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
-      }
-    });
-  });
-});
 
 module.exports = router;

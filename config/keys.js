@@ -1,4 +1,6 @@
 module.exports = {
-    mongoURI: "mongodb+srv://dfialkov:T7SD6OJcRMG7MHyf@cluster0-unygf.mongodb.net/test?retryWrites=true&w=majority",
+    mongoURI: "example",
     secretOrKey: "secret"
+    
 }
+//Key doesn't work, and neither do the ones in the previous commits. Don't waste your time. 

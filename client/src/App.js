@@ -31,6 +31,7 @@ if (localStorage.jwtToken) {
     window.location.href = "./login";
   }
 }
+//Potential project rebrand: Jerboa
 class App extends Component {
   render() {
     return (
@@ -42,6 +43,7 @@ class App extends Component {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Switch>
+
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/list" component = {ListView} />
               <PrivateRoute exact path="/board" component = {BoardView} />

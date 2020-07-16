@@ -35,5 +35,16 @@ router.post("/newapp", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+router.delete("/:id", (req, res) => {
+  Application.findByIdAndDelete(req.params.id)
+    .then(() => res.json('Application deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.get('/', (req, res) => {
+  Application.find()
+    .then(applications => res.json(applications))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
 
 module.exports = router;
